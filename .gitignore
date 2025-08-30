@@ -1,0 +1,12 @@
+# Ignore the node_modules folder
+node_modules
+tests
+tests(u can ignore this)/
+
+# Environment variables (never commit secrets)
+.env
+
+# Ignore test output and temporary files
+*.log
+test-output.txt
+debug-output.txt

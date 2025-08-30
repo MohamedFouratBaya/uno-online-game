@@ -1,0 +1,1669 @@
+/* UNO Themed Popup Overlay and Error Variant */
+.uno-popup-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 9998;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: popup-fadein 0.3s;
+}
+
+.uno-popup {
+    background: linear-gradient(135deg, #181c2f 0%, #2a2e4d 50%, #3a1c71 100%);
+    border-radius: clamp(1.2rem, 3.5vw, 2rem);
+    box-shadow: 0 clamp(0.4rem, 1.5vw, 0.8rem) clamp(2rem, 6vw, 3.2rem) #000a, 0 0 0 clamp(0.4rem, 1.5vw, 0.8rem) rgba(34,34,59,0.18) inset;
+    padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1.5rem, 4vw, 2.5rem) clamp(1.2rem, 3.5vw, 2rem) clamp(1.5rem, 4vw, 2.5rem);
+    min-width: clamp(20rem, 50vw, 32rem);
+    max-width: 90vw;
+    color: #e0e6ff;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: clamp(0.15rem, 0.6vw, 0.3rem) solid #5f5fff;
+    position: relative;
+    animation: popup-fadein 0.4s;
+}
+
+.uno-popup-error {
+    background: linear-gradient(135deg, #b71c1c 0%, #e63946 100%);
+    border: clamp(0.2rem, 0.8vw, 0.4rem) solid #b71c1c;
+    color: #fff;
+}
+
+@keyframes popup-fadein {
+    from { opacity: 0; transform: scale(0.95);}
+    to   { opacity: 1; transform: scale(1);}
+}
+
+/* Override inline styles for dynamically created victory popups */
+.uno-popup[style*="linear-gradient(135deg, rgb(255, 107, 107)"] {
+    background: linear-gradient(135deg, #181c2f 0%, #2a2e4d 50%, #3a1c71 100%) !important;
+    border: clamp(0.15rem, 0.6vw, 0.3rem) solid #5f5fff !important;
+    color: #e0e6ff !important;
+}
+
+/* Victory popup title styling */
+.uno-popup h2 {
+    color: #FFD600 !important;
+    text-shadow: 2px 2px 4px #000 !important;
+}
+
+/* Victory popup message styling */
+.uno-popup p {
+    color: #e0e6ff !important;
+}
+
+/* Victory popup buttons - ensure they match UNO theme */
+.uno-popup .new-game-btn,
+.uno-popup .exit-btn,
+.uno-popup .restart-btn {
+    background: linear-gradient(135deg, #FFD600 0%, #FFA000 100%) !important;
+    color: #22223b !important;
+    border: 2px solid #FFD600 !important;
+    font-weight: bold !important;
+    text-shadow: none !important;
+}
+
+.uno-popup .new-game-btn:hover,
+.uno-popup .exit-btn:hover,
+.uno-popup .restart-btn:hover {
+    background: linear-gradient(135deg, #FFA000 0%, #FFD600 100%) !important;
+    color: #22223b !important;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4) !important;
+}
+
+/* Additional override for any popup with uno-popup class */
+div.uno-popup {
+    background: linear-gradient(135deg, #181c2f 0%, #2a2e4d 50%, #3a1c71 100%) !important;
+    border: clamp(0.15rem, 0.6vw, 0.3rem) solid #5f5fff !important;
+    color: #e0e6ff !important;
+    box-shadow: 0 clamp(0.4rem, 1.5vw, 0.8rem) clamp(2rem, 6vw, 3.2rem) #000a, 0 0 0 clamp(0.4rem, 1.5vw, 0.8rem) rgba(34,34,59,0.18) inset !important;
+}
+
+/* Ensure all popup titles use UNO yellow */
+div.uno-popup h2,
+div.uno-popup .uno-popup-title {
+    color: #FFD600 !important;
+    text-shadow: 2px 2px 4px #000 !important;
+}
+
+/* Ensure all popup text is light colored */
+div.uno-popup p,
+div.uno-popup .uno-popup-message {
+    color: #e0e6ff !important;
+}
+
+/* Ensure all popup buttons use UNO theme */
+div.uno-popup button:not(.uno-popup-btn) {
+    background: linear-gradient(135deg, #FFD600 0%, #FFA000 100%) !important;
+    color: #22223b !important;
+    border: 2px solid #FFD600 !important;
+    font-weight: bold !important;
+    text-shadow: none !important;
+}
+
+div.uno-popup button:not(.uno-popup-btn):hover {
+    background: linear-gradient(135deg, #FFA000 0%, #FFD600 100%) !important;
+    color: #22223b !important;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4) !important;
+    transform: scale(1.05) !important;
+}
+
+/* UNO Call Button Styles */
+.uno-call-btn {
+    background: linear-gradient(45deg, #FF6B6B, #FFD93D, #6BCF7F, #4D96FF);
+    background-size: 400% 400%;
+    animation: uno-pulse 2s ease-in-out infinite, uno-gradient 3s ease infinite;
+    border: none;
+    border-radius: clamp(0.8rem, 2.5vw, 1.5rem);
+    padding: clamp(0.8rem, 2vw, 1.2rem) clamp(1.5rem, 4vw, 2.4rem);
+    font-size: clamp(0.9rem, 2.2vw, 1.1rem);
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0.125rem 0.125rem 0.25rem rgba(0,0,0,0.5);
+    cursor: pointer;
+    box-shadow: 0 clamp(0.25rem, 1vw, 0.4rem) clamp(0.9rem, 3vw, 1.5rem) rgba(255, 107, 107, 0.4);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+.uno-call-btn:hover {
+    transform: translateY(clamp(-0.1rem, -0.5vw, -0.2rem));
+    box-shadow: 0 clamp(0.4rem, 1.5vw, 0.6rem) clamp(1.2rem, 4vw, 2rem) rgba(255, 107, 107, 0.6);
+}
+.uno-call-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 clamp(0.1rem, 0.5vw, 0.2rem) clamp(0.5rem, 2vw, 0.8rem) rgba(255, 107, 107, 0.4);
+}
+.uno-call-text {
+    position: relative;
+    z-index: 1;
+}
+@keyframes uno-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+@keyframes uno-gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.uno-popup .uno-popup-logo {
+    width: clamp(60px, 7vw, 80px);
+    height: clamp(60px, 7vw, 80px);
+    margin-bottom: clamp(16px, 2vw, 20px);
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 clamp(2px, 0.4vw, 4px) clamp(8px, 1.5vw, 12px) #0005;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.uno-popup .uno-popup-logo img {
+    width: clamp(50px, 6vw, 70px);
+    height: clamp(50px, 6vw, 70px);
+    object-fit: contain;
+}
+
+.uno-popup .uno-popup-title {
+    font-size: clamp(1.6rem, 3vw, 2rem);
+    font-weight: bold;
+    color: #7f9cf5;
+    text-shadow: clamp(1px, 0.3vw, 2px) clamp(1px, 0.3vw, 2px) clamp(4px, 1vw, 8px) #000, 0 0 clamp(4px, 1vw, 8px) #3a1c71;
+    margin-bottom: clamp(10px, 1.5vw, 14px);
+    letter-spacing: clamp(1px, 0.3vw, 2px);
+}
+
+.uno-popup .uno-popup-message {
+    font-size: clamp(1.1rem, 2vw, 1.2rem);
+    color: #e0e6ff;
+    margin-bottom: clamp(16px, 2.5vw, 24px);
+    text-shadow: clamp(1px, 0.2vw, 2px) clamp(1px, 0.2vw, 2px) clamp(2px, 0.6vw, 4px) #000, 0 0 clamp(3px, 0.8vw, 6px) #3a1c71;
+}
+
+.uno-popup .uno-popup-btn {
+    background: linear-gradient(90deg, #3a1c71 0%, #5f5fff 100%);
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: clamp(8px, 1.5vw, 12px);
+    padding: clamp(8px, 1.2vw, 12px) clamp(20px, 3vw, 28px);
+    font-size: clamp(1rem, 1.8vw, 1.1rem);
+    cursor: pointer;
+    box-shadow: 0 clamp(2px, 0.4vw, 4px) clamp(6px, 1.2vw, 8px) #0005;
+    text-shadow: clamp(1px, 0.2vw, 2px) clamp(1px, 0.2vw, 2px) clamp(2px, 0.6vw, 4px) #000;
+    transition: background 0.2s, transform 0.1s;
+    margin-top: clamp(6px, 1vw, 8px);
+}
+.uno-popup .uno-popup-btn:hover {
+    background: linear-gradient(90deg, #5f5fff 0%, #3a1c71 100%);
+    transform: scale(1.05);
+}
+
+/* UNO Color Picker Popup */
+.uno-color-picker {
+    background: linear-gradient(135deg, #2c1810 0%, #3d2817 50%, #4a1c08 100%);
+    border: clamp(0.2rem, 0.8vw, 0.4rem) solid #FFD600;
+    border-radius: clamp(1.2rem, 3.5vw, 2rem);
+    box-shadow: 0 clamp(0.75rem, 2.5vw, 1.2rem) clamp(2.5rem, 7vw, 4rem) rgba(0,0,0,0.6), 0 0 0 clamp(0.4rem, 1.5vw, 0.8rem) rgba(255,214,0,0.15) inset;
+    padding: clamp(1.2rem, 3.5vw, 2rem);
+    min-width: clamp(22rem, 55vw, 35rem);
+    max-width: 90vw;
+    color: #fff;
+    text-align: center;
+    position: relative;
+    animation: popup-bounce 0.5s ease-out;
+}
+
+@keyframes popup-bounce {
+    0% { opacity: 0; transform: scale(0.8) translateY(-20px); }
+    60% { transform: scale(1.05) translateY(5px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.uno-color-picker .color-picker-title {
+    font-size: clamp(1.4rem, 3.6vw, 1.8rem);
+    font-weight: bold;
+    color: #FFD600;
+    text-shadow: clamp(0.1rem, 0.4vw, 0.2rem) clamp(0.1rem, 0.4vw, 0.2rem) clamp(0.4rem, 1.5vw, 0.8rem) #000, 0 0 clamp(0.75rem, 2.5vw, 1.2rem) #b71c1c;
+    margin-bottom: clamp(1rem, 3vw, 1.5rem);
+    letter-spacing: clamp(0.05rem, 0.2vw, 0.1rem);
+}
+
+.uno-color-picker .color-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(0.7rem, 2vw, 1rem);
+    margin-bottom: clamp(1rem, 3vw, 1.5rem);
+}
+
+.uno-color-option {
+    position: relative;
+    border: clamp(0.15rem, 0.6vw, 0.3rem) solid transparent;
+    border-radius: clamp(0.8rem, 2.5vw, 1.2rem);
+    padding: clamp(0.7rem, 2vw, 1rem);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(5px);
+    overflow: hidden;
+}
+
+.uno-color-option:hover {
+    transform: scale(1.05);
+    border-color: #FFD600;
+    box-shadow: 0 clamp(0.4rem, 1.5vw, 0.8rem) clamp(1.5rem, 4vw, 2.5rem) rgba(0,0,0,0.4), 0 0 clamp(1.2rem, 4vw, 2rem) rgba(255,214,0,0.3);
+}
+
+.uno-color-option.red {
+    background: linear-gradient(135deg, #e63946 0%, #dc2626 100%);
+    box-shadow: 0 4px 15px rgba(230,57,70,0.4);
+}
+.uno-color-option.red:hover {
+    box-shadow: 0 8px 25px rgba(230,57,70,0.6), 0 0 20px rgba(255,214,0,0.3);
+}
+
+.uno-color-option.yellow {
+    background: linear-gradient(135deg, #f4d35e 0%, #f59e0b 100%);
+    box-shadow: 0 4px 15px rgba(244,211,94,0.4);
+}
+.uno-color-option.yellow:hover {
+    box-shadow: 0 8px 25px rgba(244,211,94,0.6), 0 0 20px rgba(255,214,0,0.3);
+}
+
+.uno-color-option.green {
+    background: linear-gradient(135deg, #2a9d8f 0%, #059669 100%);
+    box-shadow: 0 4px 15px rgba(42,157,143,0.4);
+}
+.uno-color-option.green:hover {
+    box-shadow: 0 8px 25px rgba(42,157,143,0.6), 0 0 20px rgba(255,214,0,0.3);
+}
+
+.uno-color-option.blue {
+    background: linear-gradient(135deg, #457b9d 0%, #1e40af 100%);
+    box-shadow: 0 4px 15px rgba(69,123,157,0.4);
+}
+.uno-color-option.blue:hover {
+    box-shadow: 0 8px 25px rgba(69,123,157,0.6), 0 0 20px rgba(255,214,0,0.3);
+}
+
+.uno-color-option .color-name {
+    font-size: clamp(1.1rem, 2.8vw, 1.3rem);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: clamp(0.05rem, 0.2vw, 0.1rem);
+    text-shadow: clamp(0.1rem, 0.4vw, 0.2rem) clamp(0.1rem, 0.4vw, 0.2rem) clamp(0.3rem, 1.2vw, 0.6rem) rgba(0,0,0,0.7);
+    margin-bottom: clamp(0.3rem, 1vw, 0.5rem);
+}
+
+.uno-color-option .color-icon {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    margin-bottom: clamp(0.2rem, 0.6vw, 0.3rem);
+}
+
+.uno-color-picker .cancel-btn {
+    background: linear-gradient(90deg, #666 0%, #444 100%);
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: clamp(0.5rem, 1.5vw, 0.8rem);
+    padding: clamp(0.4rem, 1.2vw, 0.6rem) clamp(1rem, 3vw, 1.5rem);
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    cursor: pointer;
+    box-shadow: 0 clamp(0.1rem, 0.5vw, 0.2rem) clamp(0.4rem, 1.5vw, 0.8rem) rgba(0,0,0,0.3);
+    text-shadow: clamp(0.05rem, 0.2vw, 0.1rem) clamp(0.05rem, 0.2vw, 0.1rem) clamp(0.1rem, 0.4vw, 0.2rem) #000;
+    transition: all 0.2s ease;
+}
+
+.uno-color-picker .cancel-btn:hover {
+    background: linear-gradient(90deg, #777 0%, #555 100%);
+    transform: scale(1.05);
+}
+
+/* Modern UNO Web Game Styles with Background Image */
+:root {
+    --uno-red: #e63946;
+    --uno-green: #2a9d8f;
+    --uno-blue: #457b9d;
+    --uno-yellow: #f4d35e;
+    --uno-dark: #22223b;
+    --uno-light: #f8f9fa;
+    --uno-gray: #adb5bd;
+    --uno-bg-overlay: rgba(0,0,0,0.65);
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: url('../../public/assets/images/background.svg') no-repeat center center fixed;
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+}
+
+.animated-bg {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.animated-circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.18;
+    filter: blur(2px);
+    animation: float 18s linear infinite;
+}
+
+.animated-circle.red { background: var(--uno-red); }
+.animated-circle.green { background: var(--uno-green); }
+.animated-circle.blue { background: var(--uno-blue); }
+.animated-circle.yellow { background: var(--uno-yellow); }
+
+@keyframes float {
+    0% { transform: translateY(100vh) scale(0.8); opacity: 0.18; }
+    50% { opacity: 0.28; }
+    100% { transform: translateY(-20vh) scale(1.1); opacity: 0.18; }
+}
+
+#main-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+section {
+    background: var(--uno-bg-overlay);
+    border-radius: clamp(1rem, 2vw, 1.5rem);
+    box-shadow: 0 clamp(0.25rem, 0.8vw, 0.4rem) clamp(1.5rem, 3vw, 2.4rem) rgba(34,34,59,0.18);
+    padding: clamp(2rem, 3vw, 2.5rem) clamp(1.5rem, 2.5vw, 2rem) clamp(1.5rem, 2.5vw, 2rem) clamp(1.5rem, 2.5vw, 2rem);
+    min-width: clamp(18rem, 30vw, 26rem);
+    max-width: clamp(25rem, 45vw, 35rem);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: box-shadow 0.2s;
+    color: #fff;
+}
+
+/* Game screen gets landscape orientation - smaller container */
+section#game-screen {
+    max-width: 85vw;
+    width: 85vw;
+    max-height: 80vh;
+    height: 80vh;
+    min-width: clamp(43rem, 70vw, 70rem);
+    padding: clamp(0.5rem, 2vw, 1rem);
+    overflow: hidden;
+    opacity: 0.9;
+}
+
+h1, h2 {
+    margin-bottom: clamp(1.2rem, 2vw, 1.5rem);
+    color: var(--uno-yellow);
+    font-weight: 700;
+    letter-spacing: clamp(1px, 0.3vw, 2px);
+    text-shadow: clamp(1px, 0.2vw, 2px) clamp(1px, 0.3vw, 2px) clamp(4px, 1vw, 8px) #000;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+}
+
+label {
+    font-size: 1rem;
+    color: var(--uno-light);
+    margin-bottom: 0.5rem;
+    display: block;
+    text-shadow: 1px 1px 4px #000;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"],
+select {
+    padding: clamp(0.6rem, 1.2vw, 0.75rem) clamp(0.8rem, 1.5vw, 1rem);
+    border: clamp(1px, 0.3vw, 2px) solid var(--uno-blue);
+    border-radius: clamp(0.6rem, 1.2vw, 0.75rem);
+    font-size: clamp(1rem, 1.8vw, 1.1rem);
+    margin-bottom: clamp(1.2rem, 2vw, 1.5rem);
+    width: 100%;
+    box-sizing: border-box;
+    outline: none;
+    background: rgba(255,255,255,0.85);
+    color: #22223b;
+    transition: border 0.2s;
+}
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+select:focus {
+    border-color: var(--uno-red);
+}
+
+.button-group {
+    display: flex;
+    gap: clamp(1rem, 2vw, 1.5rem);
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.btn {
+    background: linear-gradient(90deg, var(--uno-red), var(--uno-yellow), var(--uno-green), var(--uno-blue));
+    background-size: 300% 100%;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: clamp(0.8rem, 1.5vw, 1rem);
+    padding: clamp(0.8rem, 1.5vw, 0.9rem) clamp(2rem, 3vw, 2.2rem);
+    font-size: clamp(1rem, 1.8vw, 1.1rem);
+    margin: clamp(0.4rem, 0.8vw, 0.5rem) 0;
+    cursor: pointer;
+    box-shadow: 0 clamp(2px, 0.4vw, 4px) clamp(6px, 1.2vw, 8px) rgba(34,34,59,0.18);
+    transition: background-position 0.4s, transform 0.1s;
+    text-shadow: clamp(1px, 0.2vw, 2px) clamp(1px, 0.2vw, 2px) clamp(2px, 0.6vw, 4px) #000;
+    width: 100%;
+    max-width: 280px;
+}
+.btn:hover, .btn:focus {
+    background-position: 100% 0;
+    transform: translateY(clamp(-1px, -0.3vw, -2px)) scale(1.04);
+}
+
+.logout-btn {
+    position: absolute;
+    top: clamp(12px, 2vw, 20px);
+    left: auto;
+    right: clamp(12px, 2vw, 20px);
+    background: var(--uno-red);
+    color: #fff;
+    border: none;
+    border-radius: clamp(6px, 1.2vw, 10px);
+    padding: clamp(6px, 1vw, 8px) clamp(12px, 2vw, 16px);
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 2;
+    box-shadow: 0 clamp(2px, 0.4vw, 4px) clamp(6px, 1.2vw, 8px) rgba(34,34,59,0.18);
+    text-shadow: clamp(1px, 0.2vw, 2px) clamp(1px, 0.2vw, 2px) clamp(2px, 0.6vw, 4px) #000;
+    transition: background 0.2s;
+}
+.logout-btn:hover, .logout-btn:focus {
+    background: #b71c1c;
+}
+
+.back-btn {
+    align-self: flex-start;
+    margin-bottom: clamp(12px, 1.5vw, 16px);
+    background: var(--uno-red);
+    color: #fff;
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
+    padding: clamp(6px, 1vw, 8px) clamp(12px, 2vw, 16px);
+    border-radius: clamp(6px, 1.2vw, 10px);
+    box-shadow: 0 clamp(2px, 0.4vw, 4px) clamp(6px, 1.2vw, 8px) rgba(34,34,59,0.18);
+    text-shadow: clamp(1px, 0.2vw, 2px) clamp(1px, 0.2vw, 2px) clamp(2px, 0.6vw, 4px) #000;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.back-btn:hover {
+    background: #b71c1c;
+}
+
+#lobby-screen .back-btn, #lobby-back-btn {
+    position: absolute;
+    top: clamp(12px, 2vw, 20px);
+    left: clamp(12px, 2vw, 20px);
+    z-index: 9999;
+    background: var(--uno-red);
+    color: #fff;
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
+    padding: clamp(6px, 1vw, 8px) clamp(12px, 2vw, 16px);
+    border-radius: clamp(6px, 1.2vw, 10px);
+    box-shadow: 0 clamp(2px, 0.4vw, 4px) clamp(6px, 1.2vw, 8px) rgba(34,34,59,0.18);
+    text-shadow: clamp(1px, 0.2vw, 2px) clamp(1px, 0.2vw, 2px) clamp(2px, 0.6vw, 4px) #000;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+#lobby-screen .back-btn:hover, #lobby-back-btn:hover {
+    background: #b71c1c;
+}
+
+#back-to-mode,
+#back-to-multiplayer,
+#back-to-multiplayer2 {
+    position: absolute;
+    top: clamp(12px, 2vw, 20px);
+    left: clamp(12px, 2vw, 20px);
+    z-index: 9999;
+    background: var(--uno-red);
+    color: #fff;
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
+    padding: clamp(6px, 1vw, 8px) clamp(12px, 2vw, 16px);
+    border-radius: clamp(6px, 1.2vw, 10px);
+    box-shadow: 0 clamp(2px, 0.4vw, 4px) clamp(6px, 1.2vw, 8px) rgba(34,34,59,0.18);
+    text-shadow: clamp(1px, 0.2vw, 2px) clamp(1px, 0.2vw, 2px) clamp(2px, 0.6vw, 4px) #000;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: background 0.2s;
+    align-self: unset;
+    margin-bottom: 0;
+}
+
+#back-to-mode:hover,
+#back-to-multiplayer:hover,
+#back-to-multiplayer2:hover {
+    background: #b71c1c;
+}
+
+.active-screen {
+    display: flex;
+}
+.hidden-screen {
+    display: none;
+}
+
+.error-message {
+    color: #ffb3b3;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    min-height: 1.2em;
+    text-shadow: 1px 1px 4px #000;
+}
+
+.register-link {
+    margin-top: 1.2rem;
+    color: #fff;
+    font-size: 1rem;
+    text-shadow: 1px 1px 4px #000;
+}
+.register-link a {
+    color: var(--uno-yellow);
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.room-code-box {
+    font-size: clamp(1.3rem, 2.2vw, 1.5rem);
+    font-weight: bold;
+    background: rgba(255,255,255,0.85);
+    color: var(--uno-red);
+    padding: clamp(8px, 1.2vw, 12px) clamp(16px, 2.5vw, 24px);
+    border-radius: clamp(8px, 1.2vw, 12px);
+    margin: clamp(8px, 1.2vw, 12px) 0;
+    letter-spacing: clamp(1px, 0.3vw, 2px);
+    text-align: center;
+    box-shadow: 0 clamp(2px, 0.4vw, 4px) clamp(6px, 1.2vw, 8px) rgba(34,34,59,0.18);
+}
+
+.avatar-select-group {
+    display: flex;
+    gap: clamp(6px, 1vw, 8px);
+    justify-content: center;
+    margin-bottom: clamp(16px, 2vw, 20px);
+    flex-wrap: wrap;
+    max-width: 100%;
+}
+.avatar-select-group input[type="radio"] {
+    display: none;
+}
+.avatar-select-group label {
+    cursor: pointer;
+    border-radius: 50%;
+    border: clamp(1px, 0.3vw, 2px) solid transparent;
+    transition: border 0.2s;
+    display: inline-block;
+}
+.avatar-select-group input[type="radio"]:checked + label {
+    border: clamp(1px, 0.3vw, 2px) solid var(--uno-yellow);
+    box-shadow: 0 0 0 clamp(1px, 0.3vw, 2px) var(--uno-blue);
+}
+.avatar-img {
+    width: clamp(40px, 6vw, 64px);
+    height: clamp(40px, 6vw, 64px);
+    min-width: clamp(40px, 6vw, 64px);
+    min-height: clamp(40px, 6vw, 64px);
+    max-width: clamp(40px, 6vw, 64px);
+    max-height: clamp(40px, 6vw, 64px);
+    border-radius: 50%;
+    object-fit: contain;
+    border: clamp(1px, 0.3vw, 2px) solid #fff;
+    box-shadow: 0 clamp(2px, 0.4vw, 4px) clamp(6px, 1.2vw, 8px) rgba(34,34,59,0.18);
+    background: #fff;
+    transition: width 0.2s, height 0.2s;
+}
+
+.profile-btn {
+    position: absolute;
+    top: clamp(0.8rem, 2.5vw, 1.2rem);
+    left: clamp(0.8rem, 2.5vw, 1.2rem);
+    right: auto;
+    background: rgba(0,0,0,0.7);
+    color: var(--uno-yellow);
+    border: none;
+    border-radius: clamp(0.5rem, 1.5vw, 0.7rem);
+    padding: clamp(0.3rem, 1vw, 0.5rem) clamp(0.8rem, 2.5vw, 1.2rem) clamp(0.3rem, 1vw, 0.5rem) clamp(0.5rem, 1.5vw, 0.7rem);
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 2;
+    box-shadow: 0 clamp(0.1rem, 0.5vw, 0.2rem) clamp(0.4rem, 1.5vw, 0.8rem) rgba(34,34,59,0.18);
+    text-shadow: clamp(0.05rem, 0.2vw, 0.1rem) clamp(0.05rem, 0.2vw, 0.1rem) clamp(0.2rem, 0.8vw, 0.4rem) #000;
+    display: flex;
+    align-items: center;
+    gap: clamp(0.3rem, 1vw, 0.5rem);
+    transition: background 0.2s;
+}
+.profile-btn:hover, .profile-btn:focus {
+    background: var(--uno-blue);
+}
+
+.profile-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(0.8rem, 2.5vw, 1.2rem);
+}
+.profile-avatar-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(0.5rem, 1.5vw, 0.7rem);
+}
+.profile-info {
+    margin-top: clamp(0.8rem, 2.5vw, 1.2rem);
+    color: #fff;
+    font-size: clamp(0.9rem, 2.2vw, 1.1rem);
+    text-shadow: clamp(0.05rem, 0.2vw, 0.1rem) clamp(0.05rem, 0.2vw, 0.1rem) clamp(0.2rem, 0.8vw, 0.4rem) #000;
+}
+
+.profile-player-name {
+    position: absolute;
+    left: clamp(0.8rem, 2.5vw, 1.2rem);
+    top: clamp(3rem, 8vw, 4.5rem);
+    color: var(--uno-yellow);
+    font-weight: 700;
+    text-shadow: clamp(0.1rem, 0.4vw, 0.2rem) clamp(0.1rem, 0.4vw, 0.2rem) clamp(0.4rem, 1.5vw, 0.8rem) #222, 0 0 clamp(0.4rem, 1.5vw, 0.8rem) #000;
+    font-size: clamp(0.9rem, 2.3vw, 1.15rem);
+    letter-spacing: clamp(0.05rem, 0.2vw, 0.1rem);
+    background: rgba(0,0,0,0.45);
+    border-radius: clamp(0.4rem, 1.2vw, 0.6rem);
+    padding: clamp(0.1rem, 0.4vw, 0.2rem) clamp(0.6rem, 1.8vw, 0.9rem);
+    box-shadow: 0 clamp(0.1rem, 0.5vw, 0.2rem) clamp(0.4rem, 1.5vw, 0.8rem) rgba(34,34,59,0.18);
+    z-index: 2;
+}
+
+/* Animated UNO cards in background (randomly appear and fall) */
+.animated-card {
+    position: absolute;
+    width: clamp(3.5rem, 8vw, 7rem);
+    height: clamp(5.5rem, 12vw, 11rem);
+    object-fit: contain;
+    opacity: 0.85;
+    pointer-events: none;
+    filter: drop-shadow(0 clamp(0.25rem, 1vw, 0.4rem) clamp(1rem, 3vw, 1.6rem) rgba(0,0,0,0.18));
+    top: -130px;
+    left: 0;
+    z-index: 1;
+    animation: card-fall 18s linear forwards;
+}
+@keyframes card-fall {
+    0% {
+        top: -130px;
+        opacity: 0.85;
+    }
+    10% { opacity: 1; }
+    90% { opacity: 0.95; }
+    100% {
+        top: 110vh;
+        opacity: 0.2;
+    }
+}
+@media (max-width: 600px) {
+    .animated-card {
+        width: clamp(36px, 8vw, 50px);
+        height: clamp(56px, 12vw, 78px);
+    }
+    section {
+        min-width: 0;
+        max-width: 95vw;
+        padding: 1.5rem 1rem 1.8rem 1rem;
+    }
+    h1, h2 {
+        font-size: clamp(1.4rem, 4vw, 1.6rem);
+    }
+    .btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+        max-width: none;
+        width: 100%;
+    }
+    .logout-btn {
+        top: 8px;
+        right: 8px;
+        padding: 4px 8px;
+        font-size: 0.85rem;
+    }
+    #howtoplay-screen {
+        max-width: 95vw;
+        width: 95vw;
+        padding: 1.5rem 1rem 1.8rem 1rem;
+        min-height: 200px;
+    }
+    .howtoplay-content {
+        max-height: 50vh;
+        min-height: 120px;
+    }
+}
+
+/* ============================================================================
+   RESPONSIVE GAME LAYOUT - Prevents UI overflow when drawing many cards
+   ============================================================================ */
+
+/* Game container - ensures everything fits within landscape viewport */
+#game-container {
+    height: 100%;
+    max-height: 100%;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Game table layout - optimized for landscape with centered top card and tighter spacing */
+#game-table {
+    flex: 1;
+    display: grid;
+    grid-template-areas: 
+        ". top-card actions"
+        "hand hand hand"
+        "message message message";
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: auto 1fr auto;
+    gap: clamp(0.3rem, 1vw, 0.5rem);
+    height: 100%;
+    min-height: 0;
+    align-items: start;
+}
+
+/* Top card area - positioned center-top */
+#top-card-area {
+    grid-area: top-card;
+    display: flex;
+    align-items: center;
+    gap: clamp(0.7rem, 2vw, 1rem);
+    justify-self: center;
+    text-align: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* Top card info container - allows horizontal alignment with drawn card */
+#top-card-area > span,
+#top-card-area > img,
+#top-card-area > #current-color-indicator {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* When drawn card is shown, arrange top card info in a row */
+#top-card-area:has(#drawn-card-options:not(.hidden-screen)) {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* Fallback for browsers that don't support :has() */
+@supports not (selector(:has(*))) {
+    #top-card-area.with-drawn-card {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+        width: 100%;
+    }
+}
+
+/* Game actions area - positioned top-right with tighter spacing */
+#game-actions {
+    grid-area: actions;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(0.3rem, 1vw, 0.5rem);
+    justify-self: end;
+    position: relative;
+}
+
+/* Player hand area - spans full width at bottom */
+#player-hand-area {
+    grid-area: hand;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 0;
+    position: relative;
+}
+
+/* Game message - spans full width at very bottom */
+#game-message {
+    grid-area: message;
+    text-align: center;
+    max-width: 100%;
+    word-wrap: break-word;
+}
+
+/* Player hand container - horizontal scrolling with overlap support */
+#player-hand-container {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
+    padding: clamp(0.3rem, 1vw, 0.5rem) clamp(1rem, 3vw, 2rem);
+    margin-top: clamp(0.5rem, 1.5vw, 0.7rem);
+    /* Add extra padding to accommodate card hover effects */
+    padding-top: clamp(1rem, 3vw, 1.5rem);
+}
+
+/* Scrollbar styling for hand container */
+#player-hand-container::-webkit-scrollbar {
+    height: clamp(0.4rem, 1.5vw, 0.8rem);
+}
+
+#player-hand-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: clamp(0.2rem, 0.8vw, 0.4rem);
+}
+
+#player-hand-container::-webkit-scrollbar-thumb {
+    background: var(--uno-yellow);
+    border-radius: clamp(0.2rem, 0.8vw, 0.4rem);
+}
+
+#player-hand-container::-webkit-scrollbar-thumb:hover {
+    background: #e6c54b;
+}
+
+/* Player hand - horizontal layout with overlapping cards */
+#player-hand {
+    display: flex;
+    gap: 0; /* Remove gap for overlapping effect */
+    align-items: center;
+    min-width: max-content;
+    padding: 0 clamp(0.3rem, 1vw, 0.5rem);
+    justify-content: center;
+    position: relative;
+}
+
+/* Individual card positioning for overlap effect */
+#player-hand .card-btn {
+    position: relative;
+    margin-left: clamp(-2.2rem, -5vw, -4.5rem); /* Default overlap for overlapping cards */
+    transition: all 0.3s ease;
+    z-index: 1;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    transform-origin: center center;
+}
+
+/* First card has no negative margin */
+#player-hand .card-btn:first-child {
+    margin-left: 0;
+}
+
+/* Cards 1-10: Normal display (full size, no overlap) */
+#player-hand.hand-normal .card-btn {
+    margin-left: clamp(0.3rem, 0.8vw, 0.5rem); /* Small positive gap for normal display */
+    transform: scale(1.0);
+}
+#player-hand.hand-normal .card-btn:first-child {
+    margin-left: 0;
+}
+
+/* Cards 11-14: Scale down to 0.8 with light overlap */
+#player-hand.hand-14 .card-btn {
+    margin-left: -5px;
+    transform: scale(0.8);
+}
+#player-hand.hand-14 .card-btn:first-child {
+    margin-left: 0;
+}
+
+/* Cards 15-18: Scale to 0.7 with medium overlap */
+#player-hand.hand-18 .card-btn {
+    margin-left: -10px;
+    transform: scale(0.7);
+}
+#player-hand.hand-18 .card-btn:first-child {
+    margin-left: 0;
+}
+
+/* Cards 19-22: Scale to 0.6 with heavy overlap */
+#player-hand.hand-22 .card-btn {
+    margin-left: -15px;
+    transform: scale(0.6);
+}
+#player-hand.hand-22 .card-btn:first-child {
+    margin-left: 0;
+}
+
+/* Remove conflicting styles and update */
+/* Game actions are now positioned via grid */
+
+/* Drawn card options layout - positioned in top card area */
+#drawn-card-options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(0.8rem, 2.5vw, 1.2rem);
+    justify-content: center;
+    text-align: center;
+    margin-top: clamp(0.5rem, 1.5vw, 0.8rem);
+    margin-bottom: 0;
+    position: relative;
+    width: 100%;
+}
+
+/* Ensure hidden state overrides the display */
+#drawn-card-options.hidden-screen {
+    display: none !important;
+}
+
+/* Add styling for limbo buttons container */
+.limbo-buttons {
+    display: flex;
+    gap: clamp(0.3rem, 1vw, 0.5rem);
+    justify-content: center;
+    flex-direction: row;
+}
+
+/* Enhanced hover effects for overlapping cards */
+#player-hand .card-btn:hover img {
+    box-shadow: 0 clamp(0.3rem, 1vw, 0.5rem) clamp(1.2rem, 3vw, 2rem) rgba(255, 215, 0, 0.6);
+    border: clamp(2px, 0.4vw, 3px) solid var(--uno-yellow);
+}
+
+/* Enhanced hover effects for aggressive hand sizes */
+#player-hand.hand-14 .card-btn:hover img,
+#player-hand.hand-18 .card-btn:hover img,
+#player-hand.hand-22 .card-btn:hover img {
+    box-shadow: 0 clamp(0.3rem, 1vw, 0.5rem) clamp(1.2rem, 3vw, 2rem) rgba(255, 215, 0, 0.6);
+    border: clamp(2px, 0.4vw, 3px) solid var(--uno-yellow);
+}
+
+/* Force cards to be fully opaque during player's turn - override any inline opacity */
+#player-hand .card-btn img {
+    opacity: 1 !important;
+}
+
+/* Ensure all card buttons and their images are fully opaque */
+.card-btn img {
+    opacity: 1 !important;
+}
+
+/* Override any disabled state opacity for cards during player turn */
+#player-hand .card-btn:not(:disabled) img {
+    opacity: 1 !important;
+}
+
+/* Mobile and smaller screen adaptations */
+@media (max-width: 1200px) {
+    section#game-screen {
+        min-width: 90vw;
+        width: 90vw;
+        padding: clamp(0.5rem, 1.5vw, 0.8rem);
+    }
+    
+    #game-table {
+        grid-template-areas: 
+            "top-card"
+            "actions"
+            "hand"
+            "message";
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto 1fr auto;
+        gap: clamp(0.2rem, 0.6vw, 0.3rem);
+    }
+    
+    #top-card-area,
+    #game-actions {
+        justify-self: center;
+    }
+}
+
+@media (max-height: 600px) {
+    section#game-screen {
+        height: 90vh;
+        max-height: 90vh;
+        padding: clamp(0.3rem, 1vw, 0.5rem);
+    }
+    
+    #game-table {
+        gap: clamp(0.1rem, 0.4vw, 0.2rem);
+    }
+    
+    /* Mobile responsive sizing for progressive hand sizes */
+    #player-hand .card-btn img {
+        width: clamp(2.2rem, 5.5vw, 4.5rem) !important;
+        height: clamp(3.5rem, 8.5vw, 7rem) !important;
+    }
+    
+    /* Scale transforms work automatically across all devices including mobile */
+}
+
+@media (max-width: 768px) {
+    /* Mobile progressive hand sizing - adjust margins for simplified hand sizes */
+    #player-hand .card-btn {
+        margin-left: clamp(-2.5rem, -7vw, -4rem);
+    }
+    #player-hand .card-btn:first-child {
+        margin-left: 0;
+    }
+    
+    /* Normal hand (1-10 cards) - small gap for mobile */
+    #player-hand.hand-normal .card-btn {
+        margin-left: clamp(0.1rem, 0.3vw, 0.2rem);
+    }
+    #player-hand.hand-normal .card-btn:first-child {
+        margin-left: 0;
+    }
+    
+    #player-hand .card-btn img {
+        width: clamp(2.2rem, 6vw, 4rem) !important;
+        height: clamp(3.4rem, 9vw, 6.2rem) !important;
+    }
+    
+    #player-hand.hand-14 .card-btn {
+        margin-left: -8px;
+    }
+    
+    #player-hand.hand-18 .card-btn {
+        margin-left: -12px;
+    }
+    
+    #player-hand.hand-22 .card-btn {
+        margin-left: -16px;
+    }
+    
+    /* Adjust hover effect for mobile - maintain scale transform */
+    #player-hand .card-btn:hover {
+        transform: translateY(clamp(-0.3rem, -1vw, -0.5rem)) scale(1.05);
+        margin-left: clamp(-0.8rem, -2vw, -1.5rem);
+        margin-right: clamp(-0.8rem, -2vw, -1.5rem);
+    }
+    
+    /* Mobile adjustments for active turn indicator */
+    #player-hand-area.active-turn {
+        box-shadow: 
+            0 0 clamp(0.8rem, 2.5vw, 1.2rem) rgba(255, 215, 0, 0.8),
+            0 0 clamp(1.5rem, 4vw, 2.5rem) rgba(255, 215, 0, 0.4),
+            inset 0 0 clamp(0.3rem, 1vw, 0.6rem) rgba(255, 215, 0, 0.2);
+        border: clamp(1px, 0.3vw, 2px) solid #FFD600;
+    }
+    
+    #player-hand-area.active-turn::before {
+        font-size: clamp(0.6rem, 1.2vw, 0.8rem);
+        padding: clamp(0.15rem, 0.4vw, 0.25rem) clamp(0.6rem, 1.5vw, 1rem);
+        top: clamp(-0.6rem, -1.5vw, -1rem);
+    }
+}
+
+/* How to Play Screen Styles */
+#howtoplay-screen {
+    max-width: clamp(30rem, 60vw, 48rem);
+    width: 95vw;
+    margin: clamp(1.5rem, 4vw, 2.5rem) auto 0 auto;
+    background: rgba(0,0,0,0.82);
+    border-radius: clamp(0.8rem, 2.5vw, 1.2rem);
+    box-shadow: 0 clamp(0.25rem, 1vw, 0.4rem) clamp(2rem, 6vw, 3.2rem) #0008;
+    padding: clamp(1.5rem, 4vw, 2.2rem) clamp(1.5rem, 4vw, 2.2rem) clamp(1.7rem, 4.5vw, 2.5rem) clamp(1.5rem, 4vw, 2.2rem);
+    color: #fff;
+    position: relative;
+    overflow-y: visible;
+    max-height: none;
+    min-height: clamp(20rem, 50vh, 32rem);
+}
+
+.howtoplay-content {
+    max-height: 60vh;
+    min-height: clamp(11rem, 30vh, 18rem);
+    overflow-y: auto;
+    padding-right: clamp(0.3rem, 1vw, 0.5rem);
+    scrollbar-width: thin;
+    scrollbar-color: #111 #333;
+}
+.howtoplay-content::-webkit-scrollbar {
+    width: clamp(0.6rem, 2vw, 1rem);
+    background: #333;
+    border-radius: clamp(0.4rem, 1.5vw, 0.8rem);
+}
+.howtoplay-content::-webkit-scrollbar-thumb {
+    background: #111;
+    border-radius: clamp(0.4rem, 1.5vw, 0.8rem);
+    border: clamp(0.1rem, 0.4vw, 0.2rem) solid #333;
+}
+
+/* Register Screen Styles */
+#register-screen {
+    max-width: clamp(22rem, 55vw, 35rem);
+    width: 95vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    margin: clamp(1.5rem, 4vw, 2.5rem) auto 0 auto;
+    background: rgba(0,0,0,0.82);
+    border-radius: clamp(0.8rem, 2.5vw, 1.2rem);
+    box-shadow: 0 clamp(0.25rem, 1vw, 0.4rem) clamp(2rem, 6vw, 3.2rem) #0008;
+    padding: clamp(1.5rem, 4vw, 2.2rem) clamp(1.5rem, 4vw, 2.2rem) clamp(1.7rem, 4.5vw, 2.5rem) clamp(1.5rem, 4vw, 2.2rem);
+    color: #fff;
+    position: relative;
+}
+
+/* Override body overflow for game screen */
+body.game-active {
+    overflow: auto;
+}
+
+body.game-active #game-screen {
+    overflow: visible;
+}
+
+/* Themed Game Notification Popup */
+.game-notification-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, var(--uno-red) 0%, var(--uno-yellow) 50%, var(--uno-green) 100%);
+    border-radius: 2rem;
+    box-shadow: 0 8px 32px #000a, 0 0 0 8px rgba(255,255,255,0.08) inset;
+    padding: 2.5rem 2.5rem 2rem 2.5rem;
+    min-width: 320px;
+    max-width: 90vw;
+    color: #fff;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: popup-fadein 0.4s;
+    border: 4px solid var(--uno-blue);
+}
+
+@keyframes popup-fadein {
+    from { opacity: 0; transform: translate(-50%, -60%) scale(0.95);}
+    to   { opacity: 1; transform: translate(-50%, -50%) scale(1);}
+}
+
+.game-notification-popup .uno-logo {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1.2rem;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 2px 12px #0005;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.game-notification-popup .uno-logo img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+}
+
+.game-notification-popup .popup-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--uno-yellow);
+    text-shadow: 2px 2px 8px #222, 0 0 8px #000;
+    margin-bottom: 0.7rem;
+    letter-spacing: 2px;
+}
+
+.game-notification-popup .popup-message {
+    font-size: 1.2rem;
+    color: #fff;
+    margin-bottom: 1.5rem;
+    text-shadow: 1px 1px 4px #000;
+}
+
+.game-notification-popup .popup-ok-btn {
+    background: var(--uno-blue);
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 1rem;
+    padding: 0.7rem 2.2rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(34,34,59,0.18);
+    text-shadow: 1px 1px 4px #000;
+    transition: background 0.2s, transform 0.1s;
+}
+.game-notification-popup .popup-ok-btn:hover {
+    background: var(--uno-green);
+    transform: scale(1.05);
+}
+
+/* Responsive SVG-based avatar and card images */
+.avatar-img {
+    width: 8vw;
+    height: 8vw;
+    min-width: 32px;
+    min-height: 32px;
+    max-width: 64px;
+    max-height: 64px;
+    border-radius: 50%;
+    object-fit: contain;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 8px rgba(34,34,59,0.18);
+    background: #fff;
+    transition: width 0.2s, height 0.2s;
+}
+
+/* Profile large avatar scales on mobile */
+#profile-avatar-large.avatar-img {
+    width: 14vw;
+    height: 14vw;
+    min-width: 48px;
+    min-height: 48px;
+    max-width: 96px;
+    max-height: 96px;
+}
+
+/* Lobby avatars scale with viewport */
+.lobby-avatar-box img {
+    width: 8vw !important;
+    height: 8vw !important;
+    min-width: 40px;
+    min-height: 40px;
+    max-width: 90px;
+    max-height: 90px;
+    border-radius: 16px;
+    object-fit: contain;
+    background: #fff;
+    transition: width 0.2s, height 0.2s;
+}
+
+/* Add-user SVG in lobby scales */
+.lobby-avatar-box img[alt="Add Player"] {
+    width: 5vw !important;
+    height: 5vw !important;
+    min-width: 28px;
+    min-height: 28px;
+    max-width: 60px;
+    max-height: 60px;
+    opacity: 0.7;
+}
+
+/* Game card images scale based on hand size and viewport */
+#player-hand .card-btn img,
+#top-card-img,
+#drawn-card-visual img {
+    width: clamp(36px, 8vw, 80px) !important;
+    height: clamp(54px, 12vw, 120px) !important;
+    transition: width 0.2s, height 0.2s;
+}
+
+@media (max-width: 600px) {
+    .avatar-img {
+        width: 14vw;
+        height: 14vw;
+        min-width: 24px;
+        min-height: 24px;
+        max-width: 44px;
+        max-height: 44px;
+    }
+    #profile-avatar-large.avatar-img {
+        width: 22vw;
+        height: 22vw;
+        min-width: 36px;
+        min-height: 36px;
+        max-width: 72px;
+        max-height: 72px;
+    }
+    .lobby-avatar-box img {
+        width: 14vw !important;
+        height: 14vw !important;
+        min-width: 28px;
+        min-height: 28px;
+        max-width: 60px;
+        max-height: 60px;
+    }
+    .lobby-avatar-box img[alt="Add Player"] {
+        width: 9vw !important;
+        height: 9vw !important;
+        min-width: 18px;
+        min-height: 18px;
+        max-width: 36px;
+        max-height: 36px;
+    }
+    #player-hand .card-btn img,
+    #top-card-img,
+    #drawn-card-visual img {
+        width: clamp(24px, 14vw, 60px) !important;
+        height: clamp(36px, 20vw, 94px) !important;
+    }
+}
+
+/* =============================
+   VICTORY SCREEN STYLES
+   ============================= */
+#victory-screen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0; left: 0;
+    z-index: 10000;
+    background: rgba(0,0,0,0.82) url('../../public/assets/images/background.svg') no-repeat center center fixed;
+    background-size: cover;
+    animation: victory-fadein 0.7s;
+}
+#victory-screen.active-screen {
+    display: flex;
+}
+.victory-content {
+    background: linear-gradient(135deg, #181c2f 0%, #2a2e4d 50%, #3a1c71 100%);
+    border-radius: clamp(1.5rem, 4vw, 2.5rem);
+    box-shadow: 0 clamp(0.4rem, 1.5vw, 0.8rem) clamp(3rem, 8vw, 4.8rem) #000a, 0 0 0 clamp(0.4rem, 1.5vw, 0.8rem) rgba(34,34,59,0.18) inset;
+    padding: clamp(2rem, 6vw, 3.5rem) clamp(1.5rem, 4vw, 2.5rem) clamp(1.5rem, 4vw, 2.5rem) clamp(1.5rem, 4vw, 2.5rem);
+    min-width: clamp(21rem, 55vw, 34rem);
+    max-width: 95vw;
+    color: #e0e6ff;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: clamp(0.15rem, 0.6vw, 0.3rem) solid #5f5fff;
+    position: relative;
+    margin-top: 2vh;
+}
+.victory-title {
+    font-size: clamp(2rem, 5.5vw, 2.7rem);
+    font-weight: bold;
+    color: #e63946;
+    text-shadow: clamp(0.1rem, 0.4vw, 0.2rem) clamp(0.1rem, 0.4vw, 0.2rem) clamp(0.75rem, 2.5vw, 1.2rem) #fff, 0 0 clamp(0.75rem, 2.5vw, 1.2rem) #f4d35e;
+    margin-bottom: clamp(0.8rem, 2.5vw, 1.2rem);
+    letter-spacing: clamp(0.1rem, 0.4vw, 0.2rem);
+    display: flex;
+    align-items: center;
+    gap: clamp(0.5rem, 1.5vw, 0.7rem);
+    justify-content: center;
+}
+.victory-players-list {
+    margin: clamp(1rem, 3vw, 1.5rem) 0 clamp(1.5rem, 4vw, 2.2rem) 0;
+    padding: 0;
+    list-style: none;
+    width: 100%;
+    max-width: clamp(21rem, 55vw, 34rem);
+    background: rgba(255,255,255,0.85);
+    border-radius: clamp(0.8rem, 2.5vw, 1.2rem);
+    box-shadow: 0 clamp(0.1rem, 0.5vw, 0.2rem) clamp(0.75rem, 2.5vw, 1.2rem) #0002;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: #22223b;
+}
+.victory-players-list li {
+    padding: clamp(0.5rem, 1.5vw, 0.8rem) clamp(0.3rem, 1vw, 0.5rem);
+    border-bottom: clamp(0.05rem, 0.2vw, 0.1rem) solid #ffe066;
+    font-weight: 500;
+    letter-spacing: clamp(0.05rem, 0.2vw, 0.1rem);
+}
+.victory-players-list li:last-child {
+    border-bottom: none;
+}
+.victory-buttons {
+    display: flex;
+    gap: clamp(1rem, 3vw, 1.5rem);
+    justify-content: center;
+    margin-top: clamp(1rem, 3vw, 1.5rem);
+}
+.victory-btn {
+    background: linear-gradient(90deg, #3a1c71 0%, #ffe066 100%);
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: clamp(0.8rem, 2.5vw, 1.2rem);
+    padding: clamp(0.6rem, 1.8vw, 0.9rem) clamp(1.7rem, 5vw, 2.5rem);
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    cursor: pointer;
+    box-shadow: 0 clamp(0.1rem, 0.5vw, 0.2rem) clamp(0.75rem, 2.5vw, 1.2rem) #0005;
+    text-shadow: clamp(0.05rem, 0.2vw, 0.1rem) clamp(0.05rem, 0.2vw, 0.1rem) clamp(0.2rem, 0.8vw, 0.4rem) #000;
+    transition: background 0.2s, transform 0.1s;
+}
+.victory-btn:hover {
+    background: linear-gradient(90deg, #ffe066 0%, #3a1c71 100%);
+    color: #3a1c71;
+    transform: scale(1.05);
+}
+@keyframes victory-fadein {
+    from { opacity: 0; transform: scale(0.97);}
+    to   { opacity: 1; transform: scale(1);}
+}
+
+/* Self UNO Button Styles */
+.uno-self-btn {
+    background: linear-gradient(45deg, #4CAF50, #8BC34A, #CDDC39, #FFEB3B);
+    background-size: 400% 400%;
+    animation: uno-self-pulse 1.5s ease-in-out infinite, uno-self-gradient 2s ease infinite;
+    border: none;
+    border-radius: clamp(0.8rem, 2.5vw, 1.5rem);
+    padding: clamp(0.8rem, 2vw, 1.2rem) clamp(1.5rem, 4vw, 2.4rem);
+    font-size: clamp(0.9rem, 2.2vw, 1.1rem);
+    font-weight: bold;
+    color: #2E7D32;
+    text-shadow: clamp(0.05rem, 0.2vw, 0.1rem) clamp(0.05rem, 0.2vw, 0.1rem) clamp(0.1rem, 0.4vw, 0.2rem) rgba(0,0,0,0.3);
+    cursor: pointer;
+    box-shadow: 0 clamp(0.25rem, 1vw, 0.4rem) clamp(0.9rem, 3vw, 1.5rem) rgba(76, 175, 80, 0.4);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+.uno-self-btn:hover {
+    transform: translateY(clamp(-0.1rem, -0.4vw, -0.2rem));
+    box-shadow: 0 clamp(0.4rem, 1.5vw, 0.6rem) clamp(1.2rem, 4vw, 2rem) rgba(76, 175, 80, 0.6);
+    background: linear-gradient(45deg, #66BB6A, #9CCC65, #D4E157, #FFEE58);
+}
+.uno-self-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 clamp(0.1rem, 0.5vw, 0.2rem) clamp(0.5rem, 2vw, 0.8rem) rgba(76, 175, 80, 0.4);
+}
+.uno-self-text {
+    position: relative;
+    z-index: 1;
+}
+@keyframes uno-self-pulse {
+    0%, 100% { 
+        transform: scale(1); 
+        box-shadow: 0 clamp(0.25rem, 1vw, 0.4rem) clamp(0.9rem, 3vw, 1.5rem) rgba(76, 175, 80, 0.4); 
+    }
+    50% { 
+        transform: scale(1.08); 
+        box-shadow: 0 clamp(0.4rem, 1.5vw, 0.6rem) clamp(1.5rem, 4vw, 2.5rem) rgba(76, 175, 80, 0.7); 
+    }
+}
+@keyframes uno-self-gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Top card visual styling to match drawn card */
+#top-card-img {
+    border: clamp(1px, 0.2vw, 2px) solid #FFD600;
+    background: #fff;
+    border-radius: clamp(0.4rem, 1vw, 0.6rem);
+    box-shadow: 0 clamp(0.1rem, 0.4vw, 0.2rem) clamp(0.4rem, 1.2vw, 0.8rem) rgba(0,0,0,0.3);
+}
+
+/* Hover effect - bring card to front and show full card */
+#player-hand .card-btn:hover {
+    z-index: 10;
+    transform: translateY(clamp(-0.5rem, -1.5vw, -0.8rem)) scale(1.1);
+    margin-left: clamp(-1rem, -2.5vw, -2rem);
+    margin-right: clamp(-1rem, -2.5vw, -2rem);
+}
+
+/* Ensure hovered card doesn't get covered by adjacent cards */
+#player-hand .card-btn:hover + .card-btn {
+    margin-left: clamp(-1rem, -2.5vw, -2rem);
+}
+
+/* Drawn card display - positioned in top card area */
+#drawn-card-display {
+    background: rgba(255, 215, 0, 0.1);
+    border: clamp(0.1rem, 0.4vw, 0.2rem) solid var(--uno-yellow);
+    border-radius: clamp(0.6rem, 2vw, 1rem);
+    padding: clamp(0.3rem, 1vw, 0.5rem) clamp(0.7rem, 2vw, 1rem);
+    max-width: clamp(12rem, 40vw, 20rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(0.3rem, 1vw, 0.5rem);
+    margin: 0 clamp(1rem, 3vw, 2rem);
+    position: static;
+    z-index: 10;
+}
+
+/* Drawn card visual styling for limbo state */
+#drawn-card-visual img {
+    border: clamp(0.15rem, 0.5vw, 0.25rem) solid #FFD600 !important;
+    box-shadow: 0 0 clamp(0.9rem, 3vw, 1.5rem) rgba(244, 211, 94, 0.5);
+    border-radius: clamp(0.6rem, 2vw, 1rem);
+    margin: 0;
+    background: #fff;
+    object-fit: contain;
+}
+
+/* Default card sizing for normal hands (1-10 cards) */
+#player-hand .card-btn img {
+    width: clamp(3rem, 7vw, 6rem) !important;
+    height: clamp(4.7rem, 11vw, 9.4rem) !important;
+    transition: all 0.3s ease;
+    border-radius: clamp(0.4rem, 1vw, 0.6rem);
+    box-shadow: 0 clamp(0.1rem, 0.4vw, 0.2rem) clamp(0.4rem, 1.2vw, 0.8rem) rgba(0,0,0,0.3);
+    border: clamp(1px, 0.2vw, 2px) solid #fff;
+    background: #fff;
+    object-fit: contain;
+}
+
+/*
+==============================================================================
+DYNAMIC HAND LAYOUT SYSTEM - SCALE-BASED PROGRESSIVE SIZING
+
+
+==============================================================================
+*/
+
+/* Active Turn Indicator - Glowing outline for current player */
+#player-hand-area.active-turn {
+    position: relative;
+    border-radius: clamp(0.8rem, 2vw, 1.2rem);
+    box-shadow: 
+        0 0 clamp(1rem, 3vw, 1.5rem) rgba(255, 215, 0, 0.8),
+        0 0 clamp(2rem, 5vw, 3rem) rgba(255, 215, 0, 0.4),
+        inset 0 0 clamp(0.5rem, 1.5vw, 0.8rem) rgba(255, 215, 0, 0.2);
+    border: clamp(2px, 0.4vw, 3px) solid #FFD600;
+    background: rgba(255, 215, 0, 0.05);
+    animation: turn-glow 2s ease-in-out infinite alternate;
+    transition: all 0.3s ease;
+}
+
+/* Pulsing glow animation for active turn */
+@keyframes turn-glow {
+    0% {
+        box-shadow: 
+            0 0 clamp(1rem, 3vw, 1.5rem) rgba(255, 215, 0, 0.6),
+            0 0 clamp(2rem, 5vw, 3rem) rgba(255, 215, 0, 0.3),
+            inset 0 0 clamp(0.5rem, 1.5vw, 0.8rem) rgba(255, 215, 0, 0.15);
+    }
+    100% {
+        box-shadow: 
+            0 0 clamp(1.5rem, 4vw, 2rem) rgba(255, 215, 0, 1),
+            0 0 clamp(3rem, 7vw, 4rem) rgba(255, 215, 0, 0.6),
+            inset 0 0 clamp(0.8rem, 2vw, 1.2rem) rgba(255, 215, 0, 0.3);
+    }
+}
+
+/* Alternative subtle turn indicator (optional) */
+#player-hand-area.active-turn-subtle {
+    border: clamp(2px, 0.4vw, 3px) solid #FFD600;
+    border-radius: clamp(0.6rem, 1.5vw, 0.8rem);
+    box-shadow: 0 0 clamp(0.8rem, 2vw, 1.2rem) rgba(255, 215, 0, 0.5);
+    background: rgba(255, 215, 0, 0.03);
+    transition: all 0.3s ease;
+}
+
+#player-hand-area.active-turn-subtle::before {
+    content: "●";
+    position: absolute;
+    top: clamp(-0.4rem, -1vw, -0.6rem);
+    right: clamp(0.5rem, 1.5vw, 1rem);
+    color: #FFD600;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    text-shadow: 0 0 clamp(0.2rem, 0.5vw, 0.3rem) rgba(255, 215, 0, 0.8);
+    z-index: 10;
+    animation: pulse-dot 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+/*
+==============================================================================
+ACTIVE TURN INDICATOR SUMMARY
+==============================================================================
+
+Two turn indicator options are available:
+
+1. FULL EFFECT (.active-turn):
+   - Golden glowing outline with pulsing animation
+   - "YOUR TURN" text label
+   - Enhanced card brightness
+   - Background glow
+   - Ideal for clear, prominent turn indication
+
+2. SUBTLE EFFECT (.active-turn-subtle):
+   - Simple golden border
+   - Pulsing dot indicator
+   - Minimal background glow
+   - Less distracting option
+   - Good for competitive play
+
+IMPLEMENTATION:
+Use either class on #player-hand-area:
+- playerHandArea.classList.add('active-turn'); // Full effect
+- playerHandArea.classList.add('active-turn-subtle'); // Subtle effect
+
+Both effects are fully responsive and work on mobile devices.
+==============================================================================
+*/

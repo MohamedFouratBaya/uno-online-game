@@ -1,0 +1,37 @@
+{
+  "name": "uno-frontend",
+  "version": "1.0.0",
+  "description": "UNO Web Game Frontend - A modern web-based implementation of the classic UNO card game with real-time multiplayer support",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8080",
+    "serve": "python -m http.server 8080",
+    "dev": "python -m http.server 8080"
+  },
+  "keywords": [
+    "uno",
+    "card-game",
+    "multiplayer",
+    "web-game",
+    "html",
+    "css",
+    "javascript",
+    "socket.io"
+  ],
+  "author": "UNO Game Development Team",
+  "license": "MIT",
+  "dependencies": {
+    "socket.io-client": "^4.7.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-username/uno-frontend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/uno-frontend/issues"
+  },
+  "homepage": "https://github.com/your-username/uno-frontend#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
