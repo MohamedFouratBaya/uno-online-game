@@ -1,6 +1,14 @@
 // UNO Web Game Frontend Logic
 
 document.addEventListener('DOMContentLoaded', function () {
+    (function autoOpenJoinFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    const room = params.get("room");
+    if (!room) return;
+
+    const roomInput = document.getElementById("room-code-input");
+    if (roomInput) roomInput.value = room.toUpperCase();
+  })();
     // --- UNO Themed Popup Utility ---
     function showUnoPopup(title, message, options = {}) {
         // Remove any existing popup
