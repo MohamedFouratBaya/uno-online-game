@@ -2,17 +2,13 @@
 
 document.addEventListener('DOMContentLoaded', function () {
     (function autoOpenJoinFromUrl() {
-        const params = new URLSearchParams(window.location.search);
-        const room = params.get('room');
-        if (!room) return;
+    const params = new URLSearchParams(window.location.search);
+    const room = params.get("room");
+    if (!room) return;
 
-        const code = room.toUpperCase();
-        try { sessionStorage.setItem('UNO_DEEPLINK_ROOM', code); } catch {}
-
-        // Prefill the join input (it exists in DOM even if the screen is hidden)
-        const joinInput = document.getElementById('join-room-code');
-        if (joinInput) joinInput.value = code;
-    })();
+    const roomInput = document.getElementById("join-room-code");
+    if (roomInput) roomInput.value = room.toUpperCase();
+  })();
     // --- UNO Themed Popup Utility ---
     function showUnoPopup(title, message, options = {}) {
         // Remove any existing popup
@@ -110,8 +106,47 @@ document.addEventListener('DOMContentLoaded', function () {
     // Login
     const loginForm = document.getElementById('login-form');
     const usernameInput = document.getElementById('username');
-    const passwordInput = document.getElementById('password');
-    const loginError = document.getElementById('login-error');
+        const loginError = document.getElementById('login-error');
+
+    // --- Guest profile + avatar picker (no register/login required) ---
+    const backendUrlInput = document.getElementById('backend-url');
+
+    // Restore saved profile + backend URL
+    try {
+        const savedBackend = localStorage.getItem('UNO_BACKEND_BASE');
+        if (backendUrlInput && savedBackend) backendUrlInput.value = savedBackend;
+
+        const savedProfile = localStorage.getItem('UNO_USER_PROFILE');
+        if (savedProfile) {
+            const p = JSON.parse(savedProfile);
+            if (p?.username && usernameInput) usernameInput.value = p.username;
+            if (p?.avatar) {
+                const opt = document.querySelector(`.avatar-option[data-avatar="${p.avatar}"]`);
+                if (opt) opt.classList.add('selected');
+            }
+        }
+    } catch (e) {}
+
+    // Avatar click selection
+    function wireAvatarPicker() {
+        const options = Array.from(document.querySelectorAll('.avatar-option'));
+        options.forEach(img => {
+            img.addEventListener('click', () => {
+                options.forEach(o => {
+                    o.classList.remove('selected');
+                    o.style.borderColor = 'transparent';
+                });
+                img.classList.add('selected');
+                img.style.borderColor = '#fff';
+            });
+        });
+
+        // Ensure selected has border
+        const selected = document.querySelector('.avatar-option.selected');
+        if (selected) selected.style.borderColor = '#fff';
+    }
+    wireAvatarPicker();
+
     // Register
     const showRegister = document.getElementById('show-register');
     const registerForm = document.getElementById('register-form');
@@ -193,123 +228,69 @@ document.addEventListener('DOMContentLoaded', function () {
     // ============================================================================
     
     // Backend API base URL
-    // ===== Backend URL =====
-// Multiplayer requires a backend (HTTP + Socket.IO).
-// 1) Set window.__UNO_API_BASE_URL__ in HTML (optional), OR
-// 2) Type it in the "Backend URL" box on the login screen (saved to localStorage), OR
-// 3) If empty, we'll fall back to same-origin.
-function normalizeBaseUrl(url) {
-    return (url || '').toString().trim().replace(/\/+$/g, '');
-}
-
-function getApiBaseUrl() {
-    const fromWindow = (typeof window !== 'undefined' && window.__UNO_API_BASE_URL__) ? window.__UNO_API_BASE_URL__ : '';
-    const fromStorage = (typeof localStorage !== 'undefined') ? (localStorage.getItem('UNO_API_BASE_URL') || '') : '';
-    const raw = normalizeBaseUrl(fromStorage || fromWindow);
-
-    // If not provided, use same-origin (works only if you proxy backend under same domain)
-    return raw || window.location.origin;
-}
-
-function setApiBaseUrl(url) {
-    const cleaned = normalizeBaseUrl(url);
-    if (typeof localStorage !== 'undefined') {
-        if (cleaned) localStorage.setItem('UNO_API_BASE_URL', cleaned);
-        else localStorage.removeItem('UNO_API_BASE_URL');
-    }
-}
-
-let API_BASE_URL = getApiBaseUrl();
+    let API_BASE_URL = (localStorage.getItem('UNO_BACKEND_BASE') || '').replace(/\/+$/, '');
+    if (!API_BASE_URL) API_BASE_URL = window.location.origin;
     
     // User state - backend is the source of truth
     let currentUser = null;
-
-    // Show currently configured backend URL (if any) in the login screen
-    const backendUrlInput = document.getElementById('backend-url');
-    if (backendUrlInput) {
-        const fromWindow = (typeof window !== 'undefined' && window.__UNO_API_BASE_URL__) ? window.__UNO_API_BASE_URL__ : '';
-        const fromStorage = (typeof localStorage !== 'undefined') ? (localStorage.getItem('UNO_API_BASE_URL') || '') : '';
-        backendUrlInput.value = normalizeBaseUrl(fromStorage || fromWindow);
-    }
-
-    // Auto-restore local user session (no backend login required)
-    try {
-        const saved = localStorage.getItem('UNO_USER');
-        if (saved) currentUser = JSON.parse(saved);
-    } catch {}
-
-    // If we have a saved user, skip login UI
-    if (currentUser && currentUser.username) {
-        updateProfileButton();
-        showScreen(modeScreen);
-    }
-
     let latestGameState = null; // Single source of truth from backend
     let isAdmin = false;
 
     // Login form submit - integrated with backend authentication
-    loginForm.addEventListener('submit', async function (e) {
+    loginForm.addEventListener('submit', function (e) {
         e.preventDefault();
 
-        // Save backend URL (optional)
-        const backendUrlInput = document.getElementById('backend-url');
-        if (backendUrlInput) {
-            setApiBaseUrl(backendUrlInput.value);
-            API_BASE_URL = getApiBaseUrl();
+        const backendInput = document.getElementById('backend-url');
+        const rawBackend = backendInput ? backendInput.value.trim() : '';
+        if (rawBackend) {
+            API_BASE_URL = rawBackend.replace(/\/+$/, '');
+            localStorage.setItem('UNO_BACKEND_BASE', API_BASE_URL);
         }
 
-        const username = (usernameInput?.value || '').trim();
+        const username = usernameInput.value.trim();
+        loginError.textContent = '';
+
         if (!username) {
             loginError.textContent = 'Please enter a username.';
             return;
         }
 
-        // Pick avatar from login radios (or fallback to previous saved avatar)
-        const selectedAvatar =
-            (document.querySelector('input[name="login-avatar"]:checked')?.value) ||
-            (document.querySelector('input[name="reg-avatar"]:checked')?.value) ||
-            (currentUser?.avatar) ||
-            'public/assets/images/avatar/exported avatar/ava-1.svg';
+        const selected = document.querySelector('.avatar-option.selected');
+        const avatar = selected ? selected.getAttribute('data-avatar') : 'public/assets/images/avatar/exported avatar/ava-1.svg';
 
-        // Local "auth" (no backend required)
-        currentUser = {
-            name: username,
-            username,
-            avatar: selectedAvatar,
-            games_played: currentUser?.games_played || 0,
-            games_won: currentUser?.games_won || 0
-        };
+        currentUser = { username, avatar };
+        localStorage.setItem('UNO_USER_PROFILE', JSON.stringify(currentUser));
 
-        // Persist locally so refresh keeps you logged in
-        try { localStorage.setItem('UNO_USER', JSON.stringify(currentUser)); } catch {}
+        // If someone opened a Discord deep link (?room=XXXX), remember it so join UI can prefill later
+        const params = new URLSearchParams(window.location.search);
+        const room = params.get('room');
+        if (room) localStorage.setItem('UNO_PENDING_ROOM', room.toUpperCase());
 
-        updateProfileButton();
         showScreen(modeScreen);
-
-        // If page opened with ?room=XXXX, jump straight to Join Room after "login"
-        const deeplinkRoom = (() => { try { return sessionStorage.getItem('UNO_DEEPLINK_ROOM'); } catch { return null; } })();
-        if (deeplinkRoom) {
-            try { sessionStorage.removeItem('UNO_DEEPLINK_ROOM'); } catch {}
-            // Navigate: Mode -> Multiplayer -> Join form
-            showScreen(multiplayerOptions);
-            showScreen(joinRoomForm);
-            const joinInput = document.getElementById('join-room-code');
-            if (joinInput) joinInput.value = deeplinkRoom;
+    });
+            
+            const data = await response.json();
+            
+            if (response.ok) {
+                // Login successful
+                currentUser = data.user;
+                
+                updateProfileButton();
+                showScreen(modeScreen);
+                loginForm.reset();
+            } else {
+                // Login failed
+                loginError.textContent = data.error || 'Login failed';
+            }
+        } catch (error) {
+            console.error('Login error:', error);
+            loginError.textContent = 'Network error. Please try again.';
         }
-
-        loginForm.reset();
-        loginError.textContent = '';
     });
 
-    // Show register form (optional UI)
-    if (showRegister) {
-        showRegister.addEventListener('click', function (e) {
-            e.preventDefault();
-            showScreen(registerScreen);
-            registerForm.reset();
-            registerError.textContent = '';
-        });
-    }
+    // Show register form
+    showRegister.addEventListener('click', function (e) {
+        e.preventDefault();
         showScreen(registerScreen);
         registerForm.reset();
         registerError.textContent = '';
@@ -329,40 +310,84 @@ let API_BASE_URL = getApiBaseUrl();
     // Register form submit - integrated with backend authentication
     registerForm.addEventListener('submit', async function (e) {
         e.preventDefault();
-
-        const name = regNameInput.value.trim();
-        const username = regUsernameInput.value.trim();
-        const password = regPasswordInput.value;
-        const confirm = regConfirmInput.value;
-
+        const name = document.getElementById('reg-name').value.trim();
+        const username = document.getElementById('reg-username').value.trim();
+        const password = document.getElementById('reg-password').value;
+        const confirm = document.getElementById('reg-confirm').value;
+        const avatar = registerForm.querySelector('input[name="reg-avatar"]:checked');
+        
+        // Clear previous error
         registerError.textContent = '';
-
-        if (!name || !username) {
-            registerError.textContent = 'Please fill in name and username.';
+        
+        // Client-side validation
+        if (!name || !username || !password || !confirm || !avatar) {
+            registerError.textContent = 'All fields are required.';
             return;
         }
         if (password !== confirm) {
             registerError.textContent = 'Passwords do not match.';
             return;
         }
-
-        const avatar = document.querySelector('input[name="reg-avatar"]:checked')?.value
-            || 'public/assets/images/avatar/exported avatar/ava-1.svg';
-
-        // Local "register" (no backend required)
-        currentUser = {
-            name,
-            username,
-            avatar,
-            games_played: 0,
-            games_won: 0
-        };
-
-        try { localStorage.setItem('UNO_USER', JSON.stringify(currentUser)); } catch {}
-
-        updateProfileButton();
-        showScreen(modeScreen);
-        registerForm.reset();
+        
+        try {
+            // Register user with backend
+            const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    full_name: name, 
+                    username, 
+                    password, 
+                    avatar_url: avatar.value 
+                })
+            });
+            
+            const data = await response.json();
+            
+            if (response.ok) {
+                // Registration successful - automatically log in the user
+                try {
+                    const loginResponse = await fetch(`${API_BASE_URL}/api/auth/login`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ username, password })
+                    });
+                    
+                    const loginData = await loginResponse.json();
+                    
+                    if (loginResponse.ok) {
+                        // Auto-login successful
+                        currentUser = loginData.user;
+                        
+                        updateProfileButton();
+                        showScreen(modeScreen);
+                        registerForm.reset();
+                    } else {
+                        // Registration succeeded but auto-login failed
+                        registerError.textContent = 'Registration successful! Please log in.';
+                        setTimeout(() => {
+                            showScreen(loginScreen);
+                            registerForm.reset();
+                            registerError.textContent = '';
+                        }, 2000);
+                    }
+                } catch (loginError) {
+                    // Registration succeeded but auto-login had network error
+                    registerError.textContent = 'Registration successful! Please log in.';
+                    setTimeout(() => {
+                        showScreen(loginScreen);
+                        registerForm.reset();
+                        registerError.textContent = '';
+                    }, 2000);
+                }
+            } else {
+                // Registration failed
+                registerError.textContent = data.error || 'Registration failed';
+            }
+        } catch (error) {
+            console.error('Registration error:', error);
+            registerError.textContent = 'Network error. Please try again.';
+        }
     });
 
     // Back to login from register
