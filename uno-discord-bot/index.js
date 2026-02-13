@@ -59,7 +59,8 @@ client.on("interactionCreate", async (interaction) => {
     return interaction.editReply(`❌ Failed to create room: ${e.message}`);
   }
 
-  const joinUrl = `${UNO_FRONTEND_BASE}/?room=${encodeURIComponent(roomId)}`;
+const joinUrl = `http://localhost:8080/?room=${roomId}`;
+
 
   const channel = await client.channels.fetch(TARGET_CHANNEL_ID).catch(() => null);
   if (!channel || channel.type !== ChannelType.GuildText) {
