@@ -20,17 +20,44 @@
         <!-- Login Screen (Username & Password) -->
         <section id="login-screen" class="active-screen">
             <h1>UNO</h1>
+
+            <!-- Optional: set your backend (Render) URL here so multiplayer works -->
+            <div style="max-width:420px;margin:0 auto 1rem auto;">
+                <label for="backend-url" style="display:block;margin-bottom:0.4rem;">Backend URL (for multiplayer)</label>
+                <input type="url" id="backend-url" placeholder="https://your-backend.onrender.com" style="width:100%;" autocomplete="off">
+                <div style="font-size:0.85rem;opacity:0.85;margin-top:0.35rem;line-height:1.2;">
+                    If you leave this empty, the game will try to use the same domain as this page.
+                </div>
+            </div>
+
             <form id="login-form" autocomplete="off">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" required maxlength="16" placeholder="Username">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required maxlength="16" placeholder="Password">
-                <button type="submit" class="btn" style="display:block;margin:1.2rem auto;">Login</button>
+
+                <label style="margin-top:0.8rem;">Choose Avatar</label>
+                <div class="avatar-select-group" style="margin-bottom:0.6rem;">
+                    <input type="radio" id="login-avatar1" name="login-avatar" value="public/assets/images/avatar/exported avatar/ava-1.svg" checked>
+                    <label for="login-avatar1"><img src="public/assets/images/avatar/exported avatar/ava-1.svg" alt="Avatar 1" class="avatar-img"></label>
+
+                    <input type="radio" id="login-avatar2" name="login-avatar" value="public/assets/images/avatar/exported avatar/ava-2.svg">
+                    <label for="login-avatar2"><img src="public/assets/images/avatar/exported avatar/ava-2.svg" alt="Avatar 2" class="avatar-img"></label>
+
+                    <input type="radio" id="login-avatar3" name="login-avatar" value="public/assets/images/avatar/exported avatar/ava-3.svg">
+                    <label for="login-avatar3"><img src="public/assets/images/avatar/exported avatar/ava-3.svg" alt="Avatar 3" class="avatar-img"></label>
+
+                    <input type="radio" id="login-avatar4" name="login-avatar" value="public/assets/images/avatar/exported avatar/ava-4.svg">
+                    <label for="login-avatar4"><img src="public/assets/images/avatar/exported avatar/ava-4.svg" alt="Avatar 4" class="avatar-img"></label>
+
+                    <input type="radio" id="login-avatar5" name="login-avatar" value="public/assets/images/avatar/exported avatar/ava-5.svg">
+                    <label for="login-avatar5"><img src="public/assets/images/avatar/exported avatar/ava-5.svg" alt="Avatar 5" class="avatar-img"></label>
+
+                    <input type="radio" id="login-avatar6" name="login-avatar" value="public/assets/images/avatar/exported avatar/ava-6.svg">
+                    <label for="login-avatar6"><img src="public/assets/images/avatar/exported avatar/ava-6.svg" alt="Avatar 6" class="avatar-img"></label>
+                </div>
+
+                <button type="submit" class="btn" style="display:block;margin:1.2rem auto;">Continue</button>
                 <div id="login-error" class="error-message"></div>
             </form>
-            <div class="register-link">
-                New user? <a href="#" id="show-register">Register</a>
-            </div>
         </section>
 
         <!-- Register Screen -->
